@@ -170,6 +170,9 @@ php artisan make:model Nome -rcms --requests
 	
 php artisan make:request StoreMomemodelRequest
 
+# esamino le route
+php artisan route:list --except-vendor
+
 
 ```
 ## Auth
