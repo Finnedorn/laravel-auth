@@ -37,7 +37,9 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         //
-
+        $formData = $request->validated();
+        $slug = Str::slug($formData['project_title'],'-');
+        $formData['slug'] = $slug;
     }
 
     /**
@@ -73,5 +75,6 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+
     }
 }
