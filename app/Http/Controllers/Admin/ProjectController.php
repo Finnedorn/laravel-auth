@@ -40,6 +40,10 @@ class ProjectController extends Controller
         $formData = $request->validated();
         $slug = Str::slug($formData['project_title'],'-');
         $formData['slug'] = $slug;
+        $userId = Auth::id();
+        $formData['user_id'] = $userId;
+        $newProject = Project::create($formData);
+        return redirect()->route('admin.projects.show', $newProject->id);
     }
 
     /**
@@ -66,7 +70,12 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         //
-
+        $formData = $request->validated();
+        $slug = Str::slug($formData['project_title'],'-');
+        $formData['slug'] = $slug;
+        $formData['user_id'] = $project->userId;
+        $project->update($formData);
+        return redirect()->route('admin.projects.show', $project->id);
     }
 
     /**
@@ -75,6 +84,8 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+        $project->delete();
+        return to_route('admin.project.index')->with('message', "l'elemento $project->project_title è stato eliminato con successo");
 
     }
 }
