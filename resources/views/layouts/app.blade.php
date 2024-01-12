@@ -43,8 +43,26 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
+                        </li> --}}
+                        <li class="nav-item">
+                            {{-- <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}"
+                                href="{{ route('home') }}">
+                                {{ __('Home') }}
+                            </a> --}}
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'characters.index' ? 'active' : '' }}"
+                                href="{{ route('home') }}">
+                                {{ __('Home') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'types.index' ? 'active' : '' }}"
+                                href="{{ route('admin.projects.index') }}">
+                                {{ __('Admin') }}
+                            </a>
                         </li>
                     </ul>
 
@@ -78,7 +96,7 @@
                                 </form>
                             </div>
                         </li>
-                        @endguest
+                    @endguest
                     </ul>
                 </div>
             </div>
