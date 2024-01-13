@@ -15,11 +15,11 @@
                             {{ $project->project_title }}
                         </h1>
                         <small>
-                            Nome Repository : {{$project->repo_name}}
+                            Nome Repository: {{$project->repo_name}}
                         </small>
-                        {{-- <small>
-                            Link alla Repository : {{$project->repo_link}}
-                        </small> --}}
+                        <small>
+                            Link alla Repository: {{$project->repo_link}}
+                        </small>
                         <p>
                             {{$project->description}}
                         </p>

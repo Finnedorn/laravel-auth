@@ -47,7 +47,7 @@
                     </div>
 
                     {{-- link alla repo --}}
-                    {{-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="repo_link" class="form-label">Link alla Repository</label>
                         <input type="text"
                             class="form-control @error('repo_link') is-invalid @enderror"
@@ -57,7 +57,7 @@
                         @error('repo_link')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div> --}}
+                    </div>
 
                     {{-- description --}}
                     <div class="mb-3">

@@ -27,6 +27,7 @@ class UpdateProjectRequest extends FormRequest
             'project_title'=>['required', 'min:3', 'max:200', Rule::unique('projects')->ignore($this->project)],
             'repo_name'=>['required', 'min:3', 'max:200', Rule::unique('projects')->ignore($this->project)],
             'preview'=>['nullable', 'url'],
+            'repo_link'=>['required', 'url', Rule::unique('projects')->ignore($this->project)],
             'description'=>['nullable']
         ];
     }
@@ -41,6 +42,9 @@ class UpdateProjectRequest extends FormRequest
             'repo_name.min'=>'Il campo Nome della Repository deve avere almeno :min caratteri',
             'repo_name.max'=>'Il campo Nome della Repository deve avere un massimo di :max caratteri',
             'repo_name.unique'=>'questo Nome esiste già',
+            'repo_link.required'=>'Il campo Link alla Repository è obbligatorio',
+            'repo_link.url'=>'Inserisci un Url valido',
+            'repo_link.unique'=>'questo Link esiste già',
             'preview.url'=>'Il campo Preview deve contenere un link ad una immagine valido',
         ];
     }

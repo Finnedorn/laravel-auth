@@ -20,35 +20,46 @@
                     </a>
                 </div>
             </div>
-            <div class="row">
-                @forelse ($projects as $project)
-                    <div class="col-12 col-md-3 col-lg-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h3>
-                                    {{$project->project_title}}
-                                </h3>
-                                <small>
-                                    Nome Repository: {{$project->repo_name}}
-                                </small>
-                                <p>
-                                    {{$project->description}}
-                                </p>
-                                <div class="d-flex mt-2">
-                                    {{-- bottone di edit --}}
-                                    <a href="{{route('admin.projects.edit', $project->id)}}">
-                                        <button class="btn btn-success rounded-3 border-0 me-2">
-                                            <i class="fa-solid fa-pen" style="font-size: 0.7rem"></i>
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div>Nessun Progetto Disponibile</div>
-                @endforelse
-            </div>
+
+            <div class="card p-4 ">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Titolo del Progetto</th>
+                        <th scope="col">Nome della Repository</th>
+                        <th scope="col">Link alla Repository</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    @forelse ($projects as $project)
+                      <tr>
+                        <td>
+                            {{$project->project_title}}
+                        </td>
+                        <td>{{$project->repo_name}}</td>
+                        <td>{{$project->repo_link}}</td>
+                        <td>
+                            <a href="{{route('admin.projects.edit', $project->id)}}">
+                                <button class="btn btn-success rounded-3 border-0">
+                                    <i class="fa-solid fa-pen" style="font-size: 0.7rem"></i>
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{route('admin.projects.show', $project->id)}}">
+                                <button class="btn btn-primary rounded-3 border-0 me-2">
+                                    <i class="fa-regular fa-file-lines" style="font-size: 1rem"></i>
+                                </button>
+                            </a>
+                        </td>
+                      </tr>
+                      @empty
+                      <div>Nessun Progetto Disponibile</div>
+                    @endforelse
+                    </tbody>
+                </table>
         </div>
     </main>
 @endsection
