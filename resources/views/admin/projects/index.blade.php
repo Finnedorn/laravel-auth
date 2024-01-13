@@ -23,9 +23,8 @@
             <div class="row">
                 @forelse ($projects as $project)
                     <div class="col-12 col-md-3 col-lg-4">
-                        <div class="card mb-3">
-                            {{-- <img src="{{ $character->image }}" alt="{{ $character->name }}"> --}}
-                            <div class="card-body h-100">
+                        <div class="card h-100">
+                            <div class="card-body">
                                 <h3>
                                     {{$project->project_title}}
                                 </h3>
@@ -44,7 +43,6 @@
                                     </a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 @empty

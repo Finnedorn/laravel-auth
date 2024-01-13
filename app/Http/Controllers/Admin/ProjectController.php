@@ -73,7 +73,7 @@ class ProjectController extends Controller
         $formData = $request->validated();
         $slug = Str::slug($formData['project_title'],'-');
         $formData['slug'] = $slug;
-        $formData['user_id'] = $project->userId;
+        $formData['user_id'] = $project->user_id;
         $project->update($formData);
         return redirect()->route('admin.projects.show', $project->id);
     }
