@@ -25,7 +25,7 @@ class StoreProjectRequest extends FormRequest
             //
             'project_title'=>['required', 'min:3', 'max:200', 'unique:projects'],
             'repo_name'=>['required', 'min:3', 'max:200', 'unique:projects'],
-            'preview'=>['nullable', 'url'],
+            'preview'=>['nullable', 'image'],
             'repo_link'=>['required', 'url', 'unique:projects'],
             'description'=>['nullable']
         ];
@@ -44,7 +44,7 @@ class StoreProjectRequest extends FormRequest
             'repo_link.required'=>'Il campo Link alla Repository è obbligatorio',
             'repo_link.url'=>'Inserisci un Url valido',
             'repo_link.unique'=>'questo Link esiste già',
-            'preview.url'=>'Il campo Preview deve contenere un link ad una immagine valido',
+            'preview.image'=>'Il campo Preview deve contenere un file immagine valido',
         ];
     }
 }

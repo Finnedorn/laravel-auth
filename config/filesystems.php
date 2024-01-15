@@ -13,7 +13,12 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    // per permettere il file storage devo cambiare il metodo da local a public
+    // sia qua che nella sezione FILESYSTEM_DISK del mio file env
+    // cosa significa? in poche parole laravel ha dei preset di "comportamento"
+    // a seconda se si lavora su un server locale, pubblico o s3 ovvero attraverso un provider esterno (es:amazon)
+    // guarda l'array disks sotto
+    'default' => env('FILESYSTEM_DISK', 'public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -36,6 +41,9 @@ return [
             'throw' => false,
         ],
 
+        // cambiando da local a public comunico a laravel di storare i file
+        // nell'apposita cartella storage>app>public
+        // la url cambia in (contenuto di APP_URL nel file env)+ /storage
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -55,6 +63,8 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
+
+        // niente di mi vieta di scrivere a mano altri preset
 
     ],
 

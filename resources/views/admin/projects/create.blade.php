@@ -18,7 +18,8 @@
                 @endif
 
                 {{-- form di edit  --}}
-                <form action="{{ route('admin.projects.store') }}" method="POST">
+                {{-- aggiungo il metodo enctype="multipart/form-data" così da poter uploadare il file img in preview --}}
+                <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     {{-- titolo del progetto --}}
                     <div class="mb-3">
@@ -68,6 +69,22 @@
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    {{-- preview --}}
+                    <div class="mt-3">
+                        <label for="preview" class="form-label">Preview</label>
+                        <div class="d-flex mb-4">
+                            <div class="me-3 img-preview-box">
+                                <img id="uploaded" src="https://via.placeholder.com/200x110" width="100">
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control " name="preview" type="file" id="preview" value="{{ old('preview') }}">
+                                @error('preview')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
 
                     {{-- bottoni --}}

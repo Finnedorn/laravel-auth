@@ -4,11 +4,6 @@
     <main>
         <div id="character-detail" class="container py-5">
             <div class="row pt-5">
-                <div class="col-12 col-lg-4">
-                    <div class="img-box">
-                        {{-- <img src="{{ $project->preview }}" alt="{{ $project->project_title }}"> --}}
-                    </div>
-                </div>
                 <div class="container">
                     <div>
                         <h1 class="pb-3">
@@ -23,6 +18,12 @@
                         <p>
                             {{$project->description}}
                         </p>
+                        {{-- preview spot --}}
+                        @if ($project->preview !== null)
+                            <div class="img-box my-4 ">
+                                <img src="{{asset('storage/'. $project->preview)}}" alt="{{$project->project_title}}">
+                            </div>
+                        @endif
                         {{-- bottone di edit --}}
                         <a href="{{route('admin.projects.edit', $project->id)}}">
                             <button class="btn btn-success rounded-3 border-0">

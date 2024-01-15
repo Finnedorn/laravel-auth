@@ -10,6 +10,8 @@ use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Storage;
+
 class ProjectController extends Controller
 {
     /**
@@ -40,6 +42,12 @@ class ProjectController extends Controller
         $formData = $request->validated();
         $slug = Str::slug($formData['project_title'],'-');
         $formData['slug'] = $slug;
+
+        // formula per la storage dei file img dal campo form "preview"
+        if($request->hasFile('preview')) {
+            $preview = Storage::put('previews', $formData['preview']);
+            $formData['preview'] = $preview;
+        }
         $userId = Auth::id();
         $formData['user_id'] = $userId;
         $newProject = Project::create($formData);
@@ -74,6 +82,14 @@ class ProjectController extends Controller
         $slug = Str::slug($formData['project_title'],'-');
         $formData['slug'] = $slug;
         $formData['user_id'] = $project->user_id;
+        if($request->hasFile('preview')) {
+            // uguale a quella dello store ma qua devo specificare di cancellare prima la preview di quel project
+            if ($project->preview){
+                Storage::delete($project->preview);
+            }
+            $preview = Storage::put('previews', $formData['preview']);
+            $formData['preview'] = $preview;
+        }
         $project->update($formData);
         return redirect()->route('admin.projects.show', $project->id);
     }
@@ -84,8 +100,11 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+        if ($project->preview){
+            Storage::delete($project->preview);
+        }
         $project->delete();
-        return to_route('admin.project.index')->with('message', "l'elemento $project->project_title è stato eliminato con successo");
+        return to_route('admin.projects.index')->with('message', "l'elemento $project->project_title è stato eliminato con successo");
 
     }
 }

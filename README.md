@@ -173,6 +173,12 @@ php artisan make:request StoreMomemodelRequest
 # esamino le route
 php artisan route:list --except-vendor
 
+## creo uno storage dei file 
+
+
+
+#creo un symlink cioè un collegamento tra storage>app>public e la cartella public
+php artisan storage:link
 
 ```
 ## Auth
