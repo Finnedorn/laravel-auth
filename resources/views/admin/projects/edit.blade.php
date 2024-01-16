@@ -78,7 +78,7 @@
                     {{-- preview --}}
                     <div class="mb-3">
                         <label for="preview" class="form-label">Preview</label>
-                        <input class="form-control @error('preview') is-invalid @enderror" type="file" id="preview" value="{{ old('preview') }}">
+                        <input class="form-control @error('preview') is-invalid @enderror" name="preview" type="file" id="preview" value="{{ old('preview') }}">
                         @error('preview')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

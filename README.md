@@ -173,12 +173,47 @@ php artisan make:request StoreMomemodelRequest
 # esamino le route
 php artisan route:list --except-vendor
 
-## creo uno storage dei file 
+## creo uno STORAGE dei file 
 
+#a) config>filesystems> e controllo che default sia settata in questo modo:
+'default' => env('FILESYSTEM_DISK', 'public')
 
+#b)vado ne mio file env e camio l'impostazione FILESYSTEM_DISK da local a public
 
-#creo un symlink cioè un collegamento tra storage>app>public e la cartella public
+#c)creo un symlink cioè un collegamento tra storage>app>public e la cartella public
 php artisan storage:link
+
+#d)vado sul controller e importo lo storage
+use Illuminate\Support\Facades\Storage;
+
+#e)nella funzione store setto una formula per importare le immagini direttamente nella cartella di storage
+# esempio:
+// formula per la storage dei file img dal campo form "preview"
+if($request->hasFile('preview')) {
+    $preview = Storage::put('previews', $formData['preview']);
+    $formData['preview'] = $preview;
+}
+
+#f)faccio la stessa cosa nella edit
+# esempio:
+if($request->hasFile('preview')) {
+    // uguale a quella dello store ma qua devo specificare di cancellare prima la preview di quel project
+     if ($project->preview){
+        Storage::delete($project->preview);
+    }
+    $preview = Storage::put('previews', $formData['preview']);
+    $formData['preview'] = $preview;
+}
+
+#g)e nel delete
+#esempio:
+if ($project->preview){
+    Storage::delete($project->preview);
+}
+
+#h)il campo form affinche possa inviare i dati correttamente 
+# necessita del'aggiunta di un elemento nel tag
+enctype="multipart/form-data"
 
 ```
 ## Auth
